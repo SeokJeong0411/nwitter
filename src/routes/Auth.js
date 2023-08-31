@@ -1,7 +1,7 @@
 import { authService } from "fbase";
 import React, { useState } from "react";
 
-const Auth = () => {
+const Auth = ({ auth }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(true);
@@ -18,26 +18,31 @@ const Auth = () => {
   const toggleAccount = () => {
     setNewAccount((prev) => !prev);
   };
+  const onSocialClick = (event) => {
+    const {
+      target: { name },
+    } = event;
+    let provider;
+    if (name === "google") {
+      provider = new authService.GoogleAuthProvider();
+    } else if (name === "github") {
+      provider = new authService.GithubAuthProvider();
+    }
+    try {
+      authService.signInWithPopup(auth, provider);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  const onSubmit = async (event) => {
+  const onSubmit = (event) => {
     event.preventDefault(); // default submit 방지
     try {
-      let data;
-      const auth = authService.getAuth();
       if (newAccount) {
-        data = await authService.createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        authService.createUserWithEmailAndPassword(auth, email, password);
       } else {
-        data = await authService.signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        authService.signInWithEmailAndPassword(auth, email, password);
       }
-      console.log(data);
     } catch (error) {
       setError(error.message);
     }
@@ -69,8 +74,12 @@ const Auth = () => {
         {newAccount ? "Log In" : "Create Account"}
       </span>
       <div>
-        <button>Continue with Google</button>
-        <button>Continue with Github</button>
+        <button onClick={onSocialClick} name="google">
+          Continue with Google
+        </button>
+        <button onClick={onSocialClick} name="github">
+          Continue with Github
+        </button>
       </div>
     </div>
   );
