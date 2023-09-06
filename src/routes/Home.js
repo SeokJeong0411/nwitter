@@ -50,27 +50,31 @@ const Home = ({ auth }) => {
   };
   const onSubmit = async (event) => {
     event.preventDefault();
+    let attachmentUrl = "";
+    if (attachment != "") {
+      const storage = storageService.getStorage();
+      const fileRef = storageService.ref(
+        storage,
+        `${auth.currentUser.uid}/${uuid()}`
+      );
+      const response = await storageService.uploadString(
+        fileRef,
+        attachment,
+        "data_url"
+      );
 
-    const storage = storageService.getStorage();
-    const fileRef = storageService.ref(
-      storage,
-      `${auth.currentUser.uid}/${uuid()}`
-    );
-    const response = await storageService.uploadString(
-      fileRef,
-      attachment,
-      "data_url"
-    );
-    console.log(response);
+      attachmentUrl = await storageService.getDownloadURL(response.ref);
+    }
+    const collection = dbService.collection(db, "nweets");
+    await dbService.addDoc(collection, {
+      text: nweet,
+      createdAt: Date.now(),
+      creatorId: auth.currentUser.uid,
+      attachmentUrl,
+    });
 
-    // const collection = dbService.collection(db, "nweets");
-    // await dbService.addDoc(collection, {
-    //   text: nweet,
-    //   createdAt: Date.now(),
-    //   creatorId: auth.currentUser.uid,
-    // });
-
-    // setNweet("");
+    setNweet("");
+    setAttachment("");
   };
   const onFileChange = (event) => {
     const {
