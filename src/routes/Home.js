@@ -6,7 +6,7 @@ import { v4 as uuid } from "uuid";
 const Home = ({ auth }) => {
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState("");
   const db = dbService.getFirestore();
 
   const getNweets = async () => {
