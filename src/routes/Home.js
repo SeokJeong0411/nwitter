@@ -10,7 +10,7 @@ const Home = ({ auth }) => {
   const db = dbService.getFirestore();
 
   const getNweets = async () => {
-    const a = dbService.onSnapshot(
+    dbService.onSnapshot(
       dbService.collection(db, "nweets"),
       (snapshot) => {
         const nweetObject = snapshot.docs.map((doc) => ({
@@ -51,7 +51,7 @@ const Home = ({ auth }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
     let attachmentUrl = "";
-    if (attachment != "") {
+    if (attachment !== "") {
       const storage = storageService.getStorage();
       const fileRef = storageService.ref(
         storage,

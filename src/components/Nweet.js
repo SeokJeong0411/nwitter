@@ -1,16 +1,19 @@
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
 import React, { useState } from "react";
 
 const Nweet = ({ nweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newNweet, setNewNweet] = useState(nweetObj.text);
   const db = dbService.getFirestore();
+  const storage = storageService.getStorage();
 
   const onDeleteClick = () => {
     const ok = window.confirm("Are you sure you want to delete this nweet?");
     if (ok) {
       const a = dbService.doc(db, `nweets/${nweetObj.id}`);
       dbService.deleteDoc(a);
+      const delRef = storageService.ref(storage, nweetObj.attachmentUrl);
+      storageService.deleteObject(delRef);
     }
   };
   const onSubmit = (event) => {
