@@ -13,7 +13,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
       const a = dbService.doc(db, `nweets/${nweetObj.id}`);
       dbService.deleteDoc(a);
       const delRef = storageService.ref(storage, nweetObj.attachmentUrl);
-      storageService.deleteObject(delRef);
+      if (nweetObj.attachmentUrl) storageService.deleteObject(delRef);
     }
   };
   const onSubmit = (event) => {
