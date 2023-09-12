@@ -1,3 +1,13 @@
+# Nweet Project !!
+( [https://nomadcoders.co/nwitter] )
+- [x] 2023/08/28 (Mon) : 시작!
+- [x] 2023/09/12 (Tue) : Nweet OLD version 기능 구현 완료!
+- [ ] 2023/??/?? (???) : error 처리 및 주석 완료
+- [ ] 2023/??/?? (???) : CSS 추가
+- [ ] 2023/??/?? (???) : Nweet NEW version 기능 구현
+- [ ] 2023/??/?? (???) : 
+- [ ] 2023/??/?? (???) : git page 배포
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
