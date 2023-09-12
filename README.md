@@ -1,5 +1,5 @@
 # Nweet Project !!
-( [https://nomadcoders.co/nwitter] )
+[NomadCoder - Nweet](https://nomadcoders.co/nwitter)
 - [x] 2023/08/28 (Mon) : 시작!
 - [x] 2023/09/12 (Tue) : Nweet OLD version 기능 구현 완료!
 - [ ] 2023/??/?? (???) : error 처리 및 주석 완료
