@@ -4,22 +4,41 @@ import { authService } from "fbase";
 
 function App() {
   const auth = authService.getAuth();
+  const [user, setUser] = useState(null);
   const [init, setInit] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser);
+
   useEffect(() => {
-    authService.onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
+    authService.onAuthStateChanged(auth, () => {
+      setUser(
+        auth.currentUser
+          ? {
+              uid: auth.currentUser.uid,
+              displayName: auth.currentUser.displayName,
+              photoURL: auth.currentUser.photoURL,
+            }
+          : null
+      );
       setInit(true);
     });
   }, []);
+
+  const refreshUser = (args) => {
+    authService.updateProfile(auth.currentUser, args);
+    setUser({
+      uid: auth.currentUser.uid,
+      displayName: args.displayName,
+      photoURL: auth.currentUser.photoURL,
+    });
+  };
+
   return (
     <>
       {init ? (
-        <AppRouter isLoggedIn={isLoggedIn} auth={auth} />
+        <AppRouter
+          refreshUser={refreshUser}
+          isLoggedIn={Boolean(user)}
+          user={user}
+        />
       ) : (
         "Initializing..."
       )}

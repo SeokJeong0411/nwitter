@@ -1,7 +1,8 @@
 import { authService } from "fbase";
 import React, { useState } from "react";
 
-const Auth = ({ auth }) => {
+const Auth = () => {
+  const auth = authService.getAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(true);

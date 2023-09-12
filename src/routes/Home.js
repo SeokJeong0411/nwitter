@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { dbService, storageService } from "fbase";
+import { dbService, storageService, authService } from "fbase";
 import Nweet from "components/Nweet";
 import { v4 as uuid } from "uuid";
 
-const Home = ({ auth }) => {
+const Home = () => {
+  const auth = authService.getAuth();
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
   const [attachment, setAttachment] = useState("");
