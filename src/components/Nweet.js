@@ -2,11 +2,13 @@ import { dbService, storageService } from "fbase";
 import React, { useState } from "react";
 
 const Nweet = ({ nweetObj, isOwner }) => {
+  // default parameter
   const [editing, setEditing] = useState(false);
   const [newNweet, setNewNweet] = useState(nweetObj.text);
   const db = dbService.getFirestore();
   const storage = storageService.getStorage();
 
+  // delete Nweet
   const onDeleteClick = () => {
     const ok = window.confirm("Are you sure you want to delete this nweet?");
     if (ok) {
@@ -16,16 +18,19 @@ const Nweet = ({ nweetObj, isOwner }) => {
       if (nweetObj.attachmentUrl) storageService.deleteObject(delRef);
     }
   };
+
+  // save Nweet at database
   const onSubmit = (event) => {
     event.preventDefault();
     const a = dbService.doc(db, `nweets/${nweetObj.id}`);
     dbService.updateDoc(a, { text: newNweet });
     setEditing(false);
   };
-  const toggleEditing = () => setEditing((prev) => !prev);
+
   const onChenge = (event) => {
     setNewNweet(event.target.value);
   };
+  const toggleEditing = () => setEditing((prev) => !prev);
 
   return (
     <div>

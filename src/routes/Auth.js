@@ -3,8 +3,10 @@ import { authService } from "fbase";
 import React from "react";
 
 const Auth = () => {
+  // default parameter
   const auth = authService.getAuth();
 
+  // social login
   const onSocialClick = (event) => {
     const {
       target: { name },

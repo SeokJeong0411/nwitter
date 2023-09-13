@@ -3,15 +3,19 @@ import { authService, dbService } from "fbase";
 import { useNavigate } from "react-router-dom";
 
 const Profile = ({ refreshUser, user }) => {
+  // default parameter
   const auth = authService.getAuth();
   const navigate = useNavigate();
   const [newDisplayName, setNewDisplayName] = useState(user.displayName);
   const db = dbService.getFirestore();
 
+  // logout
   const onLogOutClick = async () => {
     await authService.signOut(auth);
     navigate("/");
   };
+
+  // function : get Nweets (only mine)
   const getMyNweets = async () => {
     const q = dbService.query(
       dbService.collection(db, "nweets"),
@@ -28,22 +32,24 @@ const Profile = ({ refreshUser, user }) => {
       // setNweets((prev) => [nweetObject, ...prev]);
     });
   };
+
+  // apply new user name on state
   const onChnage = (event) => {
     setNewDisplayName(event.target.value);
   };
+
+  // apply user name
   const onSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // prevent default submit function
 
     if (user.displayName !== newDisplayName) {
-      // await authService.updateProfile(auth.currentUser, {
-      //   displayName: newDisplayName,
-      // });
       refreshUser({
         displayName: newDisplayName,
       });
     }
   };
 
+  // get Nweets first one time
   useEffect(() => {
     getMyNweets();
   }, []);

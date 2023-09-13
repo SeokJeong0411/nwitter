@@ -3,10 +3,12 @@ import AppRouter from "components/Router";
 import { authService } from "fbase";
 
 function App() {
+  // default parameter
   const auth = authService.getAuth();
   const [user, setUser] = useState(null);
   const [init, setInit] = useState(false);
 
+  // when auth state change then update current user
   useEffect(() => {
     authService.onAuthStateChanged(auth, () => {
       setUser(
@@ -22,6 +24,7 @@ function App() {
     });
   }, []);
 
+  // update user name
   const refreshUser = (args) => {
     authService.updateProfile(auth.currentUser, args);
     setUser({

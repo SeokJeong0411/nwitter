@@ -4,10 +4,12 @@ import Nweet from "components/Nweet";
 import NweetFactory from "components/NweetFactory";
 
 const Home = () => {
+  // default parameter
   const auth = authService.getAuth();
   const db = dbService.getFirestore();
   const [nweets, setNweets] = useState([]);
 
+  // function : get Nweets from database
   const getNweets = async () => {
     dbService.onSnapshot(
       dbService.collection(db, "nweets"),
@@ -40,6 +42,7 @@ const Home = () => {
     // });
   };
 
+  // get Nweets first one time
   useEffect(() => {
     getNweets();
   }, []);

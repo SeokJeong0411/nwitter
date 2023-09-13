@@ -11,8 +11,6 @@ import Profile from "routes/Profile";
 import Navigation from "components/Navigation";
 
 const AppRouter = ({ isLoggedIn, refreshUser, user }) => {
-  console.log(user);
-  console.log(isLoggedIn);
   return (
     <Router basename={process.env.PUBLIC_URL}>
       {isLoggedIn && <Navigation user={user} />}
