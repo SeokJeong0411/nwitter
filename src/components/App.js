@@ -45,7 +45,18 @@ function App() {
       ) : (
         "Initializing..."
       )}
-      <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
+      <footer
+        style={{
+          maxWidth: 890,
+          width: "100%",
+          margin: "0 auto",
+          marginTop: 80,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        &copy; {new Date().getFullYear()} Nwitter
+      </footer>
     </>
   );
 }
