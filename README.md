@@ -4,7 +4,7 @@
 - [x] 2023/09/12 (Tue) : Nweet OLD version 기능 구현 완료!
 - [X] 2023/09/14 (Thu) : error 처리 및 주석 완료
 - [X] 2023/09/14 (Thu) : CSS 추가
-~~- [ ] 2023/??/?? (???) : Nweet NEW version 기능 구현~~ [nwitter-reloaded](https://nomadcoders.co/nwitter-reloaded) 에서 구현
+- [ ] ~~2023/??/?? (???) : Nweet NEW version 기능 구현~~ [nwitter-reloaded](https://nomadcoders.co/nwitter-reloaded) 에서 구현
 - [X] 2023/09/14 (Thu) : git page 배포
 
 # Getting Started with Create React App
